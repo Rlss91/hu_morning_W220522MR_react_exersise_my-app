@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import validation from "../validation/validation";
 import registerSchema from "../validation/register.validation";
 
@@ -15,6 +15,14 @@ const RegisterPage = () => {
     firstnameInput: [],
     lastnameInput: [],
   });
+  const passwordRef = useRef();
+  useEffect(() => {
+    if (userInputErrors.passwordInput.length === 0) {
+      passwordRef.current.style.backgroundColor = "green";
+    } else {
+      passwordRef.current.style.backgroundColor = "";
+    }
+  }, [userInputErrors]);
   const handleInputChange = (ev) => {
     let newUserInput = JSON.parse(JSON.stringify(userInput));
     newUserInput[ev.target.id] = ev.target.value;
@@ -46,7 +54,9 @@ const RegisterPage = () => {
         </label>
         <input
           type="email"
-          className="form-control"
+          className={`form-control ${
+            userInputErrors.emailInput.length === 0 ? "bg-success" : ""
+          }`}
           id="emailInput"
           aria-describedby="emailHelp"
           onChange={handleInputChange}
@@ -73,6 +83,7 @@ const RegisterPage = () => {
           id="passwordInput"
           onChange={handleInputChange}
           value={userInput.passwordInput}
+          ref={passwordRef}
         />
         <ul className="list-group">
           {userInputErrors.passwordInput.map((errorItem, idx) => (
