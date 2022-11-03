@@ -53,8 +53,11 @@ const RegisterPage = () => {
           value={userInput.emailInput}
         />
         <ul className="list-group">
-          {userInputErrors.emailInput.map((errorItem) => (
-            <li className="list-group-item list-group-item-danger">
+          {userInputErrors.emailInput.map((errorItem, idx) => (
+            <li
+              className="list-group-item list-group-item-danger"
+              key={"emailInputError" + idx}
+            >
               {errorItem}
             </li>
           ))}
@@ -72,8 +75,11 @@ const RegisterPage = () => {
           value={userInput.passwordInput}
         />
         <ul className="list-group">
-          {userInputErrors.passwordInput.map((errorItem) => (
-            <li className="list-group-item list-group-item-danger">
+          {userInputErrors.passwordInput.map((errorItem, idx) => (
+            <li
+              className="list-group-item list-group-item-danger"
+              key={"passwordInputError" + idx}
+            >
               {errorItem}
             </li>
           ))}
@@ -91,8 +97,11 @@ const RegisterPage = () => {
           value={userInput.firstnameInput}
         />
         <ul className="list-group">
-          {userInputErrors.firstnameInput.map((errorItem) => (
-            <li className="list-group-item list-group-item-danger">
+          {userInputErrors.firstnameInput.map((errorItem, idx) => (
+            <li
+              className="list-group-item list-group-item-danger"
+              key={"firstnameInputError" + idx}
+            >
               {errorItem}
             </li>
           ))}
@@ -110,8 +119,11 @@ const RegisterPage = () => {
           value={userInput.lastnameInput}
         />
         <ul className="list-group">
-          {userInputErrors.lastnameInput.map((errorItem) => (
-            <li className="list-group-item list-group-item-danger">
+          {userInputErrors.lastnameInput.map((errorItem, idx) => (
+            <li
+              className="list-group-item list-group-item-danger"
+              key={"lastnameInputError" + idx}
+            >
               {errorItem}
             </li>
           ))}
