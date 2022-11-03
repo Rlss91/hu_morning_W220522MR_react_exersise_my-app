@@ -9,6 +9,12 @@ const RegisterPage = () => {
     firstnameInput: "",
     lastnameInput: "",
   });
+  const [userInputErrors, setUserInputErrors] = useState({
+    emailInput: [],
+    passwordInput: [],
+    firstnameInput: [],
+    lastnameInput: [],
+  });
   const handleInputChange = (ev) => {
     let newUserInput = JSON.parse(JSON.stringify(userInput));
     newUserInput[ev.target.id] = ev.target.value;
@@ -17,7 +23,20 @@ const RegisterPage = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const { error } = validation(userInput, registerSchema);
-    console.log("error", error);
+    console.log("error", { errors: error.details });
+    let newUserInputErrors = {
+      emailInput: [],
+      passwordInput: [],
+      firstnameInput: [],
+      lastnameInput: [],
+    };
+    for (let errorItem of error.details) {
+      newUserInputErrors[errorItem.path[0]] = [
+        ...newUserInputErrors[errorItem.path[0]],
+        errorItem.message,
+      ];
+    }
+    setUserInputErrors(newUserInputErrors);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -33,9 +52,13 @@ const RegisterPage = () => {
           onChange={handleInputChange}
           value={userInput.emailInput}
         />
-        <div id="emailHelp" className="form-text">
-          We'll never share your email with anyone else.
-        </div>
+        <ul className="list-group">
+          {userInputErrors.emailInput.map((errorItem) => (
+            <li className="list-group-item list-group-item-danger">
+              {errorItem}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="mb-3">
         <label htmlFor="passwordInput" className="form-label">
@@ -48,6 +71,13 @@ const RegisterPage = () => {
           onChange={handleInputChange}
           value={userInput.passwordInput}
         />
+        <ul className="list-group">
+          {userInputErrors.passwordInput.map((errorItem) => (
+            <li className="list-group-item list-group-item-danger">
+              {errorItem}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="mb-3">
         <label htmlFor="firstnameInput" className="form-label">
@@ -60,6 +90,13 @@ const RegisterPage = () => {
           onChange={handleInputChange}
           value={userInput.firstnameInput}
         />
+        <ul className="list-group">
+          {userInputErrors.firstnameInput.map((errorItem) => (
+            <li className="list-group-item list-group-item-danger">
+              {errorItem}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="mb-3">
         <label htmlFor="lastnameInput" className="form-label">
@@ -72,6 +109,13 @@ const RegisterPage = () => {
           onChange={handleInputChange}
           value={userInput.lastnameInput}
         />
+        <ul className="list-group">
+          {userInputErrors.lastnameInput.map((errorItem) => (
+            <li className="list-group-item list-group-item-danger">
+              {errorItem}
+            </li>
+          ))}
+        </ul>
       </div>
       <button type="submit" className="btn btn-primary">
         Submit

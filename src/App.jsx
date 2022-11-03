@@ -12,9 +12,9 @@ function App() {
     <div className="container">
       <NavBarComponent />
       {/* <ReduxTKPage /> */}
-      {/* <RegisterPage /> */}
-      <CarsPanelPage />
-      <BsBtnComponent color={bsBtnOptions.danger}>click me</BsBtnComponent>
+      <RegisterPage />
+      {/* <CarsPanelPage /> */}
+      {/* <BsBtnComponent color={bsBtnOptions.danger}>click me</BsBtnComponent> */}
     </div>
   );
 }
